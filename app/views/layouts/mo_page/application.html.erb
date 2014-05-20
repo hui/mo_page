@@ -18,16 +18,9 @@
 
   <script>
     $(document).ready(function() {
-      if($('.simditor').length > 0) {
-        var csrfToken = $('meta[name=csrf-token]').attr('content');
-        var extraParams = {authenticity_token: csrfToken};
-        var editor = new Simditor({
-          toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'image', 'hr', 'indent', 'outdent'],
-          textarea: $('.simditor'),
-          upload: {url: "<%= images_path %>", params: extraParams},
-          pasteImage: true
-        });
-      }
+      var csrfToken = $('meta[name=csrf-token]').attr('content');
+      var extraParams = {authenticity_token: csrfToken};
+      window.page_editor = KindEditor.create('#page_body', {basePath: '/kindeditor/', minWidth: 200, minHeight: 400, uploadJson: '<%= images_path %>', extraFileUploadParams: extraParams});
     });
   </script>
 </head>
